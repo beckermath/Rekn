@@ -1,8 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import AppContext from '../AppContext'
 import { Formik, Field, Form } from 'formik';
+import { FormInput } from "shards-react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
 import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +43,8 @@ const AddPerson = () => {
           <Form>
               <div className = {classes.root}>
                 <br/>
-                <label htmlFor="name">Name</label>
+                <Typography variant = 'h6'>Add Person</Typography>
+                <FormInput placeholder='Name'/>
                 <Field className = {classes.field} name = 'name' type ='text' color = 'secondary' id="standard-basic"/><br/><br/>
                 <Button  color ='secondary' variant = 'contained' type ='submit'>Add Person</Button>
               </div>

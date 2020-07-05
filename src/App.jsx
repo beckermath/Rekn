@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Rekn from './Rekn'
+import Rekn from './Rekn2'
 import AppContainer from './AppContainer'
 
 const App = () => {

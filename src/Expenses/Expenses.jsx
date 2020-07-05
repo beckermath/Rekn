@@ -1,14 +1,11 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
-import AddExpense from './AddExpense'
-import ExpenseList from './ExpenseList'
+import AddExpense from './AddExpense2'
+import ExpenseList from './ExpenseList2'
 
 const Expenses = () => {
     return(
         <div>
-            <Typography variant = 'h6'>Add Expense</Typography>
-            <AddExpense/><br/>
-            <Typography variant = 'h6'>Expenses</Typography>
+            <AddExpense/>
             <ExpenseList/>
         </div>
        

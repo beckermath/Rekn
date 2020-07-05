@@ -1,6 +1,4 @@
 import React from 'react'
-
-
 import Group from './Group/Group'
 import Expense from './Expenses/Expenses'
 import TabPanel from './TabPanel'

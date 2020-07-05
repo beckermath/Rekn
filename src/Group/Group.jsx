@@ -1,12 +1,12 @@
-import React from 'react'
-
-import Typography from '@material-ui/core/Typography';
-import AddPerson from './AddPerson'
-import GroupList from './GroupList';
+import React from 'react';
+import AddPerson from './AddPerson2';
+import GroupList from './GroupList2';
+import AppContext from '../AppContext';
 
 
 const Group = () => {
     const [people, setPeople] = React.useState(['person1', 'person2']);
+    const ctx = React.useContext(AppContext);
 
     const handleAdd = React.useCallback((name) => {
         let current = people
@@ -18,10 +18,10 @@ const Group = () => {
 
     return (
         <div>
-            <Typography variant = 'h6'>Add Person</Typography>
-            <AddPerson onAdd = {handleAdd} /><br/>
-            <Typography variant = 'h6'>Group</Typography>
-            <GroupList people = {people}/>
+            <AddPerson onAdd = {handleAdd}/>
+            {ctx.people.length > 0 && 
+                <GroupList people = {people}/>
+            }
         </div>
     )
 }
