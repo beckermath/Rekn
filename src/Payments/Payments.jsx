@@ -1,14 +1,13 @@
 import React from 'react'
-import Balances from './Balances'
-import PaymentList from './PaymentList'
+import Balances from './Balances2'
+import PaymentList from './PaymentList2'
 import Typography from '@material-ui/core/Typography';
 
 const Payments = () => {
     return (
         <div>
-            <Typography variant = 'h6'>Balances</Typography>
             <Balances/><br/>
-            <Typography variant = 'h6'>Payments</Typography>
+            
             <PaymentList/>
         </div>
     )
