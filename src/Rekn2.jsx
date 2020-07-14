@@ -11,7 +11,12 @@ const Rekn2 = () => {
     const ctx = React.useContext(AppContext);
 
     return (
-        <Tabs defaultActiveKey="1" centered>
+        <Tabs 
+        defaultActiveKey="1" 
+        centered
+        animated
+        size='large'
+        >
             <TabPane tab="Group" key="1">
                 <Group/>
             </TabPane>

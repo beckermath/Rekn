@@ -16,9 +16,9 @@ export const calculateDebts = (group, expensesBad) => {
 
     for( i = 0; i < expenses.length; i++)
     {
-        var minus = expenses[i].amount/expenses[i].mooch.length;
+        var minus = parseFloat(expenses[i].amount)/expenses[i].mooch.length;
 
-        balances[expenses[i].payIndex] += expenses[i].amount;
+        balances[expenses[i].payIndex] += parseFloat(expenses[i].amount);
 
         for(var j = 0; j < expenses[i].mooch.length; j++)
         {
@@ -108,9 +108,9 @@ export const getBalances = (group, expensesBad) => {
 
     for( i = 0; i < expenses.length; i++)
     {
-        var minus = expenses[i].amount/expenses[i].mooch.length;
+        var minus = parseFloat(expenses[i].amount)/expenses[i].mooch.length;
 
-        balances[expenses[i].payIndex] += expenses[i].amount;
+        balances[expenses[i].payIndex] += parseFloat(expenses[i].amount);
 
         for(var j = 0; j < expenses[i].mooch.length; j++)
         {
