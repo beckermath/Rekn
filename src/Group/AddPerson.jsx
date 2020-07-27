@@ -1,33 +1,28 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import AppContext from '../AppContext'
-import { Formik, Field, Form } from 'formik';
+import React from 'react';
+
 import { FormInput } from "shards-react";
+import { Button } from "shards-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 import * as Yup from 'yup';
+import { Typography } from 'antd';
+import { Formik, Field, Form } from 'formik';
+import AppContext from '../AppContext'
+const { Title } = Typography;
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '100%',
-      },
-    },
-    field: {
-      height: 30,
-      width: '99%',
-    }
-}));
+const styles = {
+    padding: '20px',
+}
 
-const AddPerson = () => {
-    const classes = useStyles();
+const Input = ({field, form, ...props}) => {
+    return <FormInput {...field} {...props} name='name' placeholder='Name'/>
+}
+
+const AddPerson2 = () => {
     const ctx = React.useContext(AppContext)
-
+    
     return (
-      <Formik 
+        <Formik 
         initialValues={{
           name: ''
         }}
@@ -41,17 +36,17 @@ const AddPerson = () => {
         }}
         render={() => (
           <Form>
-              <div className = {classes.root}>
-                <br/>
-                <Typography variant = 'h6'>Add Person</Typography>
-                <FormInput placeholder='Name'/>
-                <Field className = {classes.field} name = 'name' type ='text' color = 'secondary' id="standard-basic"/><br/><br/>
-                <Button  color ='secondary' variant = 'contained' type ='submit'>Add Person</Button>
-              </div>
+                <div style={styles}>
+                    <Title style= {{textAlign: 'center'}}level = {2}>Create Group</Title>
+                    <Title level = {4}>Add to Group</Title>
+                    <Field component = {Input} name = 'name'/>
+                    <br/>
+                    <Button type = 'submit' style={{ width: '100%'}}>Add Person</Button>
+                </div>
           </Form>
         )}
-      />
+        />
     )
 }
 
-export default AddPerson;
+export default AddPerson2;

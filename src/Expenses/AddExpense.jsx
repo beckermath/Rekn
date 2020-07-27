@@ -1,33 +1,55 @@
 import React from 'react'
-
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
-
 import AppContext from '../AppContext'
+import * as Yup from 'yup';
+import { Typography } from 'antd';
+import { Formik, Field, Form } from 'formik';
+import { FormInput } from "shards-react";
+import { Button } from "shards-react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
+import { FormSelect } from "shards-react";
+import {
+    InputGroup,
+    InputGroupText,
+    InputGroupAddon,
+    FormCheckbox
+  } from "shards-react";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import { getPayIndex, getMooch } from '../expense.utilities';
+const { Title } = Typography;
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '100%',
-      },
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    field: {
-        height: 30,
-        width: '99%',
-      }
-}));
+const styles = {
+    padding: '20px',
+}
 
-const AddExpense = () => {
-    const classes = useStyles();
+const Input = ({field, form, ...props}) => {
+    return <FormInput {...field} {...props} name='desc' placeholder='Description'/>
+}
+
+const InputSelect = ({field, form, ...props}) => {
+    const ctx = React.useContext(AppContext);
+
+    return (
+        <FormSelect {...field} {...props} style={{ width: '100%' }}>
+            {ctx.people.map((person, index) => (
+                <option key={index}>{person}</option>
+            ))}
+        </FormSelect>
+    )
+}
+
+const InputNum = ({field, form, ...props}) => {
+    return (
+        <InputGroup>
+            <InputGroupAddon type="prepend">
+                <InputGroupText>$</InputGroupText>
+            </InputGroupAddon>
+            <FormInput {...field} {...props} name = 'amount' placeholder="Amount"/>
+        </InputGroup>
+    )
+}
+
+const AddExpense2 = () => {
     const ctx = React.useContext(AppContext);
 
     return (
@@ -52,38 +74,32 @@ const AddExpense = () => {
             }}
             render={() => (
                 <Form>
-                    <div className={classes.root}>
+                    <div style={styles}>
+                        <Title style= {{textAlign: 'center'}}level = {2}>Add Expenses</Title>
+                        <Title level = {4}>Description</Title>
+                        <Field component = {Input} name = 'name'/>
                         <br/>
-                        <label htmlFor="desc">Description</label><br/>
-                        <Field className = {classes.field} name = 'desc' type ='text' color = 'secondary' id="standard-basic"/>
-                        <br/><br/>
-                        <label htmlFor="payedBy">Payed By</label><br/>
-                        <Field className = {classes.field} as="select" name="payedBy">
-                            <option></option>
-                            {ctx.people.map((person, index) =>(
-                                <option key ={index} value = {person}>{person}</option>
-                            ))}
-                        </Field>
-                        <br/><br/>
-                        
-                        <label htmlFor="amount">Amount</label><br/>
-                        <Field className = {classes.field} name = 'amount' type ='number' color = 'secondary' id="standard-basic"/>
-                        <br/><br/>
-                        <label htmlFor="forWho">For Who?</label>
+                        <Title level = {4}>Payed by</Title>
+                        <Field component = {InputSelect} name = 'payedBy'/>
+                        <br/>
+                        <br/>
+                        <Title level = {4}>Amount</Title>
+                        <Field component = {InputNum} name = 'amount'/>
+                        <br/>
+                        <Title level = {4}>For who?</Title>
                         {ctx.people.map((person, index) => (
                             <div>
                                 <span>{person} </span>
                                 <Field type ='checkbox' key = {index} label= {person} value = {person} name = 'forWho'/>
                             </div>
-                            
                         ))}
-                        
-                        <Button  color ='secondary' variant = 'contained' type ='submit'>Add Expense</Button>
+                        <br/>
+                        <Button style={{ width: '100%' }}>Add Expense</Button>
                     </div>
                 </Form>
             )}
-            />
+        />
     )
 }
 
-export default AddExpense;
+export default AddExpense2;

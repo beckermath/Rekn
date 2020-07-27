@@ -1,6 +1,6 @@
 import React from 'react'
-import Balances from './Balances2'
-import PaymentList from './PaymentList2'
+import Balances from './Balances'
+import PaymentList from './PaymentList'
 import Typography from '@material-ui/core/Typography';
 
 const Payments = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
-import AddExpense from './AddExpense2'
-import ExpenseList from './ExpenseList2'
+import AddExpense from './AddExpense'
+import ExpenseList from './ExpenseList'
 import AppContext from '../AppContext'
 
 const Expenses = () => {

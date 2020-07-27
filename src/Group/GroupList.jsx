@@ -1,26 +1,29 @@
 import React from 'react'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import 'antd/dist/antd.css';
 import AppContext from '../AppContext'
-import Typography from '@material-ui/core/Typography';
+import { List, Typography } from 'antd';
+const { Title } = Typography;
+const styles = {
+    padding: '20px'
+}
 
-const GroupList = () => {
+const GroupList2 = () => {
     const ctx = React.useContext(AppContext)
 
     return (
-        <div>
-            <Typography variant = 'h6'>Group</Typography>
-            <List>
-                {ctx.people.map((person, index) => (
-                    <ListItem key = {index} value={person}>
-                        <ListItemText>{person}</ListItemText>
-                    </ListItem>
-                ))}  
-            </List> 
+        <div style={styles}>
+            <Title level = {4}>Current Group</Title>
+            <List
+            bordered
+            dataSource={ctx.people}
+            renderItem={item => (
+                <List.Item>
+                    <Typography.Text mark></Typography.Text> {item}
+                </List.Item>
+            )}
+            />
         </div>
-        
     )
 }
 
-export default GroupList;
+export default GroupList2;

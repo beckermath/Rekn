@@ -1,8 +1,7 @@
 import React from 'react';
-import AddPerson from './AddPerson2';
-import GroupList from './GroupList2';
+import AddPerson from './AddPerson';
+import GroupList from './GroupList';
 import AppContext from '../AppContext';
-
 
 const Group = () => {
     const [people, setPeople] = React.useState(['person1', 'person2']);
