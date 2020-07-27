@@ -12,6 +12,8 @@ const { Title } = Typography;
 
 const styles = {
     padding: '20px',
+    margin: 'auto',
+    maxWidth: 800
 }
 
 const Input = ({field, form, ...props}) => {
@@ -28,11 +30,11 @@ const AddPerson2 = () => {
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string()
-              .required('enter a name first'),
+              .required('Enter a name'),
         })}
-        onSubmit={fields => {
+        onSubmit={(fields, {resetForm}) => {
           ctx.setPeople([...ctx.people, fields.name])
-          console.log(ctx.people)
+          resetForm({values:''});
         }}
         render={() => (
           <Form>
@@ -42,6 +44,7 @@ const AddPerson2 = () => {
                     <Field component = {Input} name = 'name'/>
                     <br/>
                     <Button type = 'submit' style={{ width: '100%'}}>Add Person</Button>
+                    
                 </div>
           </Form>
         )}

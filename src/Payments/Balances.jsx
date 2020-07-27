@@ -9,6 +9,16 @@ const styles = {
     padding: '20px'
 }
 
+const possitive = {
+    backgroundColor: '#CCFFE5',
+    border: '1px solid #e0e0e0'
+}
+
+const negative = {
+    backgroundColor: '#FFCCCC',
+    border: '1px solid #e0e0e0'
+}
+
 const Balances = () => {
     const ctx = React.useContext(AppContext);
 
@@ -27,9 +37,23 @@ const Balances = () => {
             bordered
             dataSource={balances}
             renderItem={(item, index) => (
-                <List.Item>
-                    <Typography.Text mark></Typography.Text> {ctx.people[index]}: {item.toFixed(2)}
-                </List.Item>
+                <div>
+                    {item.toFixed(2) >= 0 
+                    ?
+                    <List.Item style ={possitive}
+                    actions={[<Typography>${item.toFixed(2)}</Typography>]}
+                    >
+                        <Typography.Text mark></Typography.Text> {ctx.people[index]}
+                    </List.Item>
+                    :
+                    <List.Item style ={negative}
+                    actions={[<Typography>${item.toFixed(2)}</Typography>]}
+                    >
+                        <Typography.Text mark></Typography.Text> {ctx.people[index]}
+                    </List.Item>
+                    }
+                </div>
+                
             )}
             />
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import AppContext from '../AppContext'
 import * as Yup from 'yup';
 import { Typography } from 'antd';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { FormInput } from "shards-react";
 import { Button } from "shards-react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,7 +12,6 @@ import {
     InputGroup,
     InputGroupText,
     InputGroupAddon,
-    FormCheckbox
   } from "shards-react";
 
 import { getPayIndex, getMooch } from '../expense.utilities';
@@ -20,6 +19,10 @@ const { Title } = Typography;
 
 const styles = {
     padding: '20px',
+}
+
+const errorStyles = {
+    textAlign: 'center'
 }
 
 const Input = ({field, form, ...props}) => {
@@ -30,7 +33,8 @@ const InputSelect = ({field, form, ...props}) => {
     const ctx = React.useContext(AppContext);
 
     return (
-        <FormSelect {...field} {...props} style={{ width: '100%' }}>
+        <FormSelect {...field} {...props} style={{ width: '100%' }} >
+            <option key = {-1}></option>
             {ctx.people.map((person, index) => (
                 <option key={index}>{person}</option>
             ))}
@@ -44,7 +48,7 @@ const InputNum = ({field, form, ...props}) => {
             <InputGroupAddon type="prepend">
                 <InputGroupText>$</InputGroupText>
             </InputGroupAddon>
-            <FormInput {...field} {...props} name = 'amount' placeholder="Amount"/>
+            <FormInput {...field} {...props} type='number' name = 'amount' placeholder="Amount"/>
         </InputGroup>
     )
 }
@@ -62,37 +66,52 @@ const AddExpense2 = () => {
             }}
             validationSchema={Yup.object().shape({
                 desc: Yup.string()
-                    .required('provide a description'),
+                    .required('Provide a description'),
                 payedBy: Yup.string()
-                    .required('select who payed'),
+                    .required('Select who payed'),
                 amount: Yup.number()
-                    .required('provide an amount'),
+                    .required('Provide an amount'),
+                forWho: Yup.array()
+                    .min(1, 'Select who is involved')
             })}
-            onSubmit={fields => {
+            onSubmit={(fields, {resetForm}) => {
                 ctx.setExpenses([...ctx.expenses, [getPayIndex(fields, ctx.people), fields.amount, getMooch(fields, ctx.people)]])
                 ctx.setExpensesDisplay([...ctx.expensesDisplay, fields.payedBy + " payed $" + fields.amount + " for " + fields.desc + " for " + fields.forWho.join(" and ")])
+                resetForm({values: ''})
             }}
             render={() => (
                 <Form>
                     <div style={styles}>
                         <Title style= {{textAlign: 'center'}}level = {2}>Add Expenses</Title>
                         <Title level = {4}>Description</Title>
-                        <Field component = {Input} name = 'name'/>
+                        <Field component = {Input} name = 'desc'/>
+                        <div style={errorStyles}>
+                            <ErrorMessage name = 'desc' ></ErrorMessage>
+                        </div>
                         <br/>
                         <Title level = {4}>Payed by</Title>
-                        <Field component = {InputSelect} name = 'payedBy'/>
-                        <br/>
+                        <Field placeholder='Payed by' component = {InputSelect} name = 'payedBy'/>
+                        <div style={errorStyles}>
+                            <ErrorMessage name = 'payedBy' ></ErrorMessage>
+                        </div>
                         <br/>
                         <Title level = {4}>Amount</Title>
                         <Field component = {InputNum} name = 'amount'/>
+                        <div style={errorStyles}>
+                            <ErrorMessage name = 'amount'></ErrorMessage>
+                        </div>
                         <br/>
                         <Title level = {4}>For who?</Title>
                         {ctx.people.map((person, index) => (
                             <div>
-                                <span>{person} </span>
+                                <span>{person}  </span>
                                 <Field type ='checkbox' key = {index} label= {person} value = {person} name = 'forWho'/>
                             </div>
                         ))}
+                        
+                        <div style={errorStyles}>
+                            <ErrorMessage name = 'forWho'></ErrorMessage>
+                        </div>
                         <br/>
                         <Button style={{ width: '100%' }}>Add Expense</Button>
                     </div>

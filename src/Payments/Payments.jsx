@@ -1,13 +1,17 @@
-import React from 'react'
-import Balances from './Balances'
-import PaymentList from './PaymentList'
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import Balances from './Balances';
+import PaymentList from './PaymentList';
+
+const styles = {
+    padding: '20px',
+    margin: 'auto',
+    maxWidth: 800
+}
 
 const Payments = () => {
     return (
-        <div>
+        <div style = {styles}>
             <Balances/><br/>
-            
             <PaymentList/>
         </div>
     )

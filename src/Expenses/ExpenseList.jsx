@@ -16,7 +16,7 @@ const ExpenseList = () => {
             <Title level = {4}>Current Expenses</Title>
             <List
             bordered
-            dataSource={ctx.expensesDisplay}
+            dataSource={ctx.expenses}
             renderItem={item => (
                 <List.Item>
                     <Typography.Text mark></Typography.Text> {item}

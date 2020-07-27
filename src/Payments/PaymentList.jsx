@@ -3,8 +3,8 @@ import 'antd/dist/antd.css';
 import AppContext from '../AppContext'
 import { List, Typography } from 'antd';
 import { getBalances } from '../calculator';
-import Payments from './Payments';
 import {calculateDebts } from '../calculator'
+import ArrowRightOutlined from '@ant-design/icons';
 
 
 
@@ -34,6 +34,7 @@ const PaymentList2 = () => {
             renderItem={(payment, index) => (
                 <List.Item>
                     <Typography.Text mark></Typography.Text> {payment.payer} pays {payment.reciever} ${payment.amount}
+                    
                 </List.Item>
             )}
             />

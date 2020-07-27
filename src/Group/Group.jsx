@@ -4,14 +4,12 @@ import GroupList from './GroupList';
 import AppContext from '../AppContext';
 
 const Group = () => {
-    const [people, setPeople] = React.useState(['person1', 'person2']);
+    const [people, setPeople] = React.useState([]);
     const ctx = React.useContext(AppContext);
 
     const handleAdd = React.useCallback((name) => {
-        let current = people
-        console.log(people)
-        current.push(name)
-        console.log(current)
+        let current = people;
+        current.push(name);
         setPeople(current);
     }, [people])
 
