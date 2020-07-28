@@ -3,13 +3,10 @@ import Rekn from './Rekn'
 import AppContainer from './AppContainer'
 
 const App = () => {
-
   return (
-    <div>
-      <AppContainer>
-        <Rekn/>
-      </AppContainer>
-    </div>
+    <AppContainer>
+      <Rekn/>
+    </AppContainer>
   );
 }
 

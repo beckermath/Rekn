@@ -20,35 +20,34 @@ const Input = ({field, form, ...props}) => {
     return <FormInput {...field} {...props} name='name' placeholder='Name'/>
 }
 
-const AddPerson2 = () => {
-    const ctx = React.useContext(AppContext)
-    
-    return (
-        <Formik 
-        initialValues={{
-          name: ''
-        }}
-        validationSchema={Yup.object().shape({
-          name: Yup.string()
-              .required('Enter a name'),
-        })}
-        onSubmit={(fields, {resetForm}) => {
-          ctx.setPeople([...ctx.people, fields.name])
-          resetForm({values:''});
-        }}
-        render={() => (
-          <Form>
-                <div style={styles}>
-                    <Title level = {4}>Add to Group</Title>
-                    <Field component = {Input} name = 'name'/>
-                    <br/>
-                    <Button type = 'submit' style={{ width: '100%'}}>Add Person</Button>
-                    
-                </div>
-          </Form>
-        )}
-        />
-    )
+const AddPerson = () => {
+  const ctx = React.useContext(AppContext)
+  
+  return (
+    <Formik 
+    initialValues={{
+      name: ''
+    }}
+    validationSchema={Yup.object().shape({
+      name: Yup.string()
+      .required('Enter a name'),
+    })}
+    onSubmit={(fields, {resetForm}) => {
+      ctx.setPeople([...ctx.people, fields.name])
+      resetForm({values:''});
+    }}
+    render={() => (
+      <Form>
+        <div style={styles}>
+          <Title level = {4}>Add to Group</Title>
+          <Field component = {Input} name = 'name'/>
+          <br/>
+          <Button type = 'submit' style={{ width: '100%'}}>Add Person</Button>
+        </div>
+      </Form>
+    )}
+    />
+  )
 }
 
-export default AddPerson2;
+export default AddPerson;

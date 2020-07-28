@@ -13,9 +13,7 @@ const linkStyles = {
 }
 
 const ExpenseList = () => {
-    const ctx = React.useContext(AppContext)
-    const [expenses, setExpenses] = React.useState([]);
-    const [expensesDisplay, setExpensesDisplay] = React.useState([]);
+    const ctx = React.useContext(AppContext);
 
     const handleRemove = React.useCallback((event) => {
         let removalIndex;
@@ -27,15 +25,15 @@ const ExpenseList = () => {
             }
         }
 
-        let temp = ctx.expenses;
-        let temp2 = ctx.expensesDisplay;
+        let temp = [...ctx.expenses];
+        let temp2 = [...ctx.expensesDisplay];
 
         temp.splice(removalIndex, 1);
         temp2.splice(removalIndex, 1);
 
-        setExpenses(temp);
-        setExpensesDisplay(temp2);
-    }, [expenses, expensesDisplay, ctx.expensesDisplay, ctx.expenses]);
+        ctx.setExpenses(temp);
+        ctx.setExpensesDisplay(temp2);
+    }, [ctx.expensesDisplay, ctx.expenses]);
 
     return(
         <div style={styles}>
