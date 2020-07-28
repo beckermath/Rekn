@@ -6,7 +6,8 @@ const AppContext = React.createContext({
     expenses: [],
     expensesDisplay: [],
     balances: [],
-    payments: []
+    payments: [],
+    activeTab: 1
 });
 
 export default AppContext;

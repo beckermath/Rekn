@@ -7,7 +7,7 @@ const { Title } = Typography;
 const styles = {
     padding: '20px',
     margin: 'auto',
-    maxWidth: 800
+    maxWidth: 600
 }
 
 const linkStyles = {

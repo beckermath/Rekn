@@ -7,7 +7,7 @@ import Payment from './Payments/Payments'
 import AppContext from './AppContext';
 const { TabPane } = Tabs;
 
-const Rekn2 = () => {
+const Rekn = () => {
     const ctx = React.useContext(AppContext);
 
     return (
@@ -30,4 +30,4 @@ const Rekn2 = () => {
     )
 }
 
-export default Rekn2;
+export default Rekn;

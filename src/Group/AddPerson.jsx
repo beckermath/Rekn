@@ -13,7 +13,7 @@ const { Title } = Typography;
 const styles = {
     padding: '20px',
     margin: 'auto',
-    maxWidth: 800
+    maxWidth: 600
 }
 
 const Input = ({field, form, ...props}) => {
@@ -39,7 +39,6 @@ const AddPerson2 = () => {
         render={() => (
           <Form>
                 <div style={styles}>
-                    <Title style= {{textAlign: 'center'}}level = {2}>Create Group</Title>
                     <Title level = {4}>Add to Group</Title>
                     <Field component = {Input} name = 'name'/>
                     <br/>

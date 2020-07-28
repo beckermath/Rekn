@@ -33,8 +33,8 @@ const InputSelect = ({field, form, ...props}) => {
     const ctx = React.useContext(AppContext);
 
     return (
-        <FormSelect {...field} {...props} style={{ width: '100%' }} >
-            <option key = {-1}></option>
+        <FormSelect placeholder = "Payed by" {...field} {...props} style={{ width: '100%' }} >
+            <option placeholder = "Payed by" key = {-1}></option>
             {ctx.people.map((person, index) => (
                 <option key={index}>{person}</option>
             ))}
@@ -76,29 +76,34 @@ const AddExpense2 = () => {
             })}
             onSubmit={(fields, {resetForm}) => {
                 ctx.setExpenses([...ctx.expenses, [getPayIndex(fields, ctx.people), fields.amount, getMooch(fields, ctx.people)]])
-                ctx.setExpensesDisplay([...ctx.expensesDisplay, fields.payedBy + " payed $" + fields.amount + " for " + fields.desc + " for " + fields.forWho.join(" and ")])
-                resetForm({values: ''})
+                const exp = {
+                    desc: fields.desc,
+                    amount: fields.amount,
+                    payedBy: fields.payedBy,
+                    forWho: ctx.people.length === fields.forWho.length ? "everyone" : fields.forWho.join(" and ")
+                }
+                ctx.setExpensesDisplay([...ctx.expensesDisplay, exp]);
+                resetForm({values: ''});
             }}
             render={() => (
                 <Form>
                     <div style={styles}>
-                        <Title style= {{textAlign: 'center'}}level = {2}>Add Expenses</Title>
                         <Title level = {4}>Description</Title>
                         <Field component = {Input} name = 'desc'/>
                         <div style={errorStyles}>
                             <ErrorMessage name = 'desc' ></ErrorMessage>
                         </div>
                         <br/>
-                        <Title level = {4}>Payed by</Title>
-                        <Field placeholder='Payed by' component = {InputSelect} name = 'payedBy'/>
-                        <div style={errorStyles}>
-                            <ErrorMessage name = 'payedBy' ></ErrorMessage>
-                        </div>
-                        <br/>
                         <Title level = {4}>Amount</Title>
                         <Field component = {InputNum} name = 'amount'/>
                         <div style={errorStyles}>
                             <ErrorMessage name = 'amount'></ErrorMessage>
+                        </div>
+                        <br/>
+                        <Title level = {4}>Payed by</Title>
+                        <Field placeholder='Payed by' component = {InputSelect} name = 'payedBy'/>
+                        <div style={errorStyles}>
+                            <ErrorMessage name = 'payedBy' ></ErrorMessage>
                         </div>
                         <br/>
                         <Title level = {4}>For who?</Title>
